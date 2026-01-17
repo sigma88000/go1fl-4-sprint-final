@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Yandex-Practicum/tr/internal/daysteps"
+	"github.com/Yandex-Practicum/tracker/internal/daysteps"
 	"github.com/Yandex-Practicum/tracker/internal/spentcalories"
 )
 
@@ -52,14 +52,14 @@ func main() {
 	var (
 		trainingInfo string
 		trainingLog  []string
+		err          error
 	)
 
 	for _, v := range trainings {
-		info, err := spentcalories.TrainingInfo(v, weight, height)
+		trainingInfo, err = spentcalories.TrainingInfo(v, weight, height)
 		if err != nil {
+			// чтобы журнал не ломался, сохраняем текст ошибки (как строку)
 			trainingInfo = err.Error()
-		} else {
-			trainingInfo = info
 		}
 		trainingLog = append(trainingLog, trainingInfo)
 	}
