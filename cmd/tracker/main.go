@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 
-"github.com/Yandex-Practicum/tracker/internal/daysteps"
-"github.com/Yandex-Practicum/tracker/internal/spentcalories")
+	"github.com/Yandex-Practicum/tr/internal/daysteps"
+	"github.com/Yandex-Practicum/tracker/internal/spentcalories"
+)
 
 func main() {
 	weight := 84.6
@@ -54,7 +55,12 @@ func main() {
 	)
 
 	for _, v := range trainings {
-		trainingInfo = spentcalories.TrainingInfo(v, weight, height)
+		info, err := spentcalories.TrainingInfo(v, weight, height)
+		if err != nil {
+			trainingInfo = err.Error()
+		} else {
+			trainingInfo = info
+		}
 		trainingLog = append(trainingLog, trainingInfo)
 	}
 
